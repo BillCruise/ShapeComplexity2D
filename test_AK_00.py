@@ -1,6 +1,8 @@
 # The main land mass of Alaska is defined by over 70,000 coordinates.
 # This is by far the largest polygon in the congressional districts file,
 # so it makes a good test case for MemoryErrors.
+# Coords: 70774
+# Complexity: 0.144214008329
 
 import json
 from shape_complexity_2d.shape_complexity_2d import *

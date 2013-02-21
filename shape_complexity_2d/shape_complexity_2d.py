@@ -176,8 +176,8 @@ def random_factor(coords):
 # Build a trace (spanning tree) of the coordinates starting at the specified point.
 def trace_search(coords, start_point):
     # initialize a matrix to represent a spanning tree
-    span_tree = [[0 for i in range(len(coords))] for j in range(len(coords))]
-
+    span_tree = [[] for i in range(len(coords))]
+    
     # create a 2D index of non-passed points and populate it
     props = index.Property()
     props.dimension = 2
@@ -199,7 +199,7 @@ def trace_search(coords, start_point):
     passed_indices.append(v_c_i)
 
     # connect the start point to its nearest neighbor
-    span_tree[nn_i[0]][v_c_i] = 1
+    span_tree[nn_i[0]].append(v_c_i)
 
     # initialize the previous point to the start point
     v_prev = start_point
@@ -220,7 +220,7 @@ def trace_search(coords, start_point):
         v_nn1 = coords[nn_i[0]]
 
         if(distance(v_p, v_nn1) < delta):
-            span_tree[v_c_i][nn_i[0]] = 1
+            span_tree[v_c_i].append(nn_i[0])
             idx_non_passed.delete(nn_i[0], (v_nn1[0], v_nn1[1], v_nn1[0], v_nn1[1]))
             v_prev = v_c
             v_c_i = nn_i[0]
@@ -231,7 +231,7 @@ def trace_search(coords, start_point):
             nn_i = list(idx_non_passed.nearest((v_c[0], v_c[1]), 1))
             v_nn2 = coords[nn_i[0]]
             if(distance(v_c, v_nn2) < delta):
-                span_tree[v_c_i][nn_i[0]] = 1
+                span_tree[v_c_i].append(nn_i[0])
                 idx_non_passed.delete(nn_i[0], (v_nn2[0], v_nn2[1], v_nn2[0], v_nn2[1]))
                 v_prev = v_c
                 v_c_i = nn_i[0]
@@ -258,7 +258,7 @@ def trace_search(coords, start_point):
                         v_st_i = v_i
                         
                 # update the span tree
-                span_tree[v_st_i][v_nn3_i] = 1
+                span_tree[v_st_i].append(v_nn3_i)
                 idx_non_passed.delete(v_nn3_i, (v_nn3[0], v_nn3[1], v_nn3[0], v_nn3[1]))
                 v_prev = v_st
                 v_c_i = v_nn3_i
@@ -271,8 +271,12 @@ def trace_search(coords, start_point):
 def trace_distance(trace_a, trace_b):
     sum_of_diffs = 0
     for i in range(0, len(trace_a)):
-        for j in range(0, len(trace_a[i])):
-            sum_of_diffs += math.fabs(trace_a[i][j] - trace_b[i][j])
+        if not trace_a[i]:
+            for val in trace_b[i]:
+                sum_of_diffs += 1
+        for val in trace_a[i]:
+            if not val in trace_b[i]:
+                sum_of_diffs += 1
 
     return sum_of_diffs / (4.0 * (len(trace_a) - 1))
 

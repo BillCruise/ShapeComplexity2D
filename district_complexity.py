@@ -5,7 +5,7 @@ import json
 from shape_complexity_2d.shape_complexity_2d import *
 
 print('Opening data file...')
-json_data = open('data/cgd112p020.json')
+json_data = open('data/cgd112p020-AK00.json')
 
 print('Loading Congressional Districts data...')
 data = json.load(json_data)
