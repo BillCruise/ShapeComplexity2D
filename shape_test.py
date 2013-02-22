@@ -3,6 +3,7 @@
 # score a relatively low complexity.
 
 from shape_complexity_2d.shape_complexity_2d import *
+from shape_complexity_2d.centroid import *
 
 def main():
   
@@ -15,9 +16,14 @@ def main():
                  [ 12.0, 0.0 ], [ 10.0, 0.0 ], [ 8.0, 0.0 ], [ 6.0, 0.0 ],
                  [ 4.0, 0.0 ], [ 2.0, 0.0 ], [ 0.0, 0.0 ] ]
 
-    print 'Triangle Points:', len(triangle)
+    print 'Triangle'
+    print 'No. Points:', len(triangle)
+    a = area(triangle)
+    center = centroid(triangle)
     complexity = shape_complexity(triangle)
-    print 'Triangle Complexity:', complexity
+    print 'Area:', a
+    print 'Center:', center
+    print 'Complexity:', complexity
 
     rectangle = [ [ -10.0, 10.0 ], [ -8.0, 10.0 ], [ -6.0, 10.0 ], [ -4.0, 10.0 ],
                   [ -2.0, 10.0 ], [  0.0, 10.0 ], [  2.0, 10.0 ], [  4.0, 10.0 ],
@@ -29,9 +35,14 @@ def main():
                   [ -10.0,  6.0 ], [ -10.0,  8.0 ], [ -10.0, 10.0 ] ]
 
     print
-    print 'Rectangle Points:', len(rectangle)
+    print 'Rectangle'
+    print 'No. Points:', len(rectangle)
+    a = area(rectangle)
+    center = centroid(rectangle)
     complexity = shape_complexity(rectangle)
-    print 'Rectangle Complexity:', complexity
+    print 'Area:', a
+    print 'Center:', center
+    print 'Complexity:', complexity
 
 
     trapezoid = [ [ -10.0, 10.0 ], [ -8.0, 10.0 ], [ -6.0, 10.0 ], [ -4.0, 10.0 ],
@@ -43,9 +54,15 @@ def main():
                   [ -10.0, 8.0 ], [ -10.0, 10.0 ] ]
 
     print
-    print 'Trapezoid Points:', len(trapezoid)
+    print 'Trapezoid'
+    print 'No. Points:', len(trapezoid)
+    a = area(trapezoid)
+    center = centroid(trapezoid)
     complexity = shape_complexity(trapezoid)
-    print 'Trapezoid Complexity:', complexity
+    print 'Area:', a
+    print 'Center:', center
+    complexity = shape_complexity(trapezoid)
+    print 'Complexity:', complexity
 
 
     circle = [ [ 9.78147600733, 2.07911690817 ],
@@ -81,9 +98,15 @@ def main():
                [ 9.78147600735, 2.079116908177 ] ]
                
     print
-    print 'Circle Points:', len(circle)
+    print 'Circle'
+    print 'No. Points:', len(circle)
+    a = area(circle)
+    center = centroid(circle)
     complexity = shape_complexity(circle)
-    print 'Circle Complexity:', complexity
+    print 'Area:', a
+    print 'Center:', center
+    complexity = shape_complexity(circle)
+    print 'Complexity:', complexity
 
 
     # Small set of sample data from the congressional districts file
@@ -97,9 +120,15 @@ def main():
                [ -65.4714659849815, 18.0883655505946 ] ]
 
     print
-    print 'Island Points:', len(island)
+    print 'Island'
+    print 'No. Points:', len(island)
+    a = area(island)
+    center = centroid(island)
     complexity = shape_complexity(island)
-    print 'Island Complexity:', complexity
+    print 'Area:', a
+    print 'Center:', center
+    complexity = shape_complexity(island)
+    print 'Complexity:', complexity
 
 
 if __name__ == '__main__':
