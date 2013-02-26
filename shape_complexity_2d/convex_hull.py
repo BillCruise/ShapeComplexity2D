@@ -1,5 +1,6 @@
 # Convex hull (Graham scan by x-coordinate) and diameter of a set of points
 # David Eppstein, UC Irvine, 7 Mar 2002
+# http://code.activestate.com/recipes/117225-convex-hull-and-diameter-of-2d-point-sets/
 
 from __future__ import generators
 
