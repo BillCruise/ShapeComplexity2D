@@ -175,7 +175,7 @@ def random_factor(coords):
 
 # Build a trace (spanning tree) of the coordinates starting at the specified point.
 def trace_search(coords, start_point):
-    # initialize a matrix to represent a spanning tree
+    # initialize a "matrix" to represent a spanning tree
     span_tree = [[] for i in range(len(coords))]
     
     # create a 2D index of non-passed points and populate it
@@ -200,6 +200,7 @@ def trace_search(coords, start_point):
 
     # connect the start point to its nearest neighbor
     span_tree[nn_i[0]].append(v_c_i)
+    span_tree[v_c_i].append(nn_i[0])
 
     # initialize the previous point to the start point
     v_prev = start_point
@@ -220,6 +221,7 @@ def trace_search(coords, start_point):
         v_nn1 = coords[nn_i[0]]
 
         if(distance(v_p, v_nn1) < delta):
+            span_tree[nn_i[0]].append(v_c_i)
             span_tree[v_c_i].append(nn_i[0])
             idx_non_passed.delete(nn_i[0], (v_nn1[0], v_nn1[1], v_nn1[0], v_nn1[1]))
             v_prev = v_c
@@ -231,6 +233,7 @@ def trace_search(coords, start_point):
             nn_i = list(idx_non_passed.nearest((v_c[0], v_c[1]), 1))
             v_nn2 = coords[nn_i[0]]
             if(distance(v_c, v_nn2) < delta):
+                span_tree[nn_i[0]].append(v_c_i)
                 span_tree[v_c_i].append(nn_i[0])
                 idx_non_passed.delete(nn_i[0], (v_nn2[0], v_nn2[1], v_nn2[0], v_nn2[1]))
                 v_prev = v_c
@@ -259,6 +262,7 @@ def trace_search(coords, start_point):
                         
                 # update the span tree
                 span_tree[v_st_i].append(v_nn3_i)
+                span_tree[v_nn3_i].append(v_st_i)
                 idx_non_passed.delete(v_nn3_i, (v_nn3[0], v_nn3[1], v_nn3[0], v_nn3[1]))
                 v_prev = v_st
                 v_c_i = v_nn3_i
