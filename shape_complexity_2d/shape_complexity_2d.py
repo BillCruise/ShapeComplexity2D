@@ -27,11 +27,11 @@ def shape_complexity(coords):
     
     p = perceptual_smoothness(coords)
 
-    # print
-    # print ' Global Distance Factor:', gdf
-    # print ' Local Angle Factor:', laf
-    # print ' Random Factor:', r
-    # print ' Perceptual Smoothness:', p
+    print
+    print ' Global Distance Factor:', gdf
+    print ' Local Angle Factor:', laf
+    print ' Random Factor:', r
+    print ' Perceptual Smoothness:', p
 
     return (1 + r) * (alpha_1 * min(gdf, laf) + alpha_2 * max(gdf, laf) + alpha_3 * p)
 
